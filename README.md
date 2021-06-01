@@ -39,13 +39,16 @@ python manage.py runserver
 
 Open the [Bangazon database diagram](https://dbdiagram.io/d/5bad7831a3794b0014b3ccc7) in the browser to view the tables and relationships for your database. Note that the tables names and field names are written in Pascal case, and not in snake case. Your database has everything in snake case, so while the field names are different, the resources and relationships are identical to the ERD.
 
+<details>
+  <img src="./assets/images/bangazon_eCommerce.png" alt="entity relationship diagram for Bangazon database" />
+</details>
 ## Postman Request Collection
 
 1. Open Postman
 1. Click Import from the navbar
 1. Choose the Link option
 1. Paste in this URL:
-    `https://www.getpostman.com/collections/c29b98258d312bf240b7`
+   `https://www.getpostman.com/collections/c29b98258d312bf240b7`
 1. Your should be prompted to import **Bangazon Python API**.
 1. Click the Import button to complete the process.
 
@@ -53,9 +56,9 @@ To test it out, expand the Profile sub-collection, double-click on Login and sen
 
 ```json
 {
-    "valid": true,
-    "token": "9ba45f09651c5b0c404f37a2d2572c026c146690",
-    "id": 5
+  "valid": true,
+  "token": "9ba45f09651c5b0c404f37a2d2572c026c146690",
+  "id": 5
 }
 ```
 

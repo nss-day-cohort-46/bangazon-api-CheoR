@@ -23,3 +23,14 @@ SELECT p.id AS product_id,
 FROM bangazonapi_product p
  INNER JOIN bangazonapi_productrating r ON p.customer_id = r.customer_id
 ORDER BY p.customer_id;
+/*
+ Fetch products $999 and below for report.
+ */
+SELECT p.id,
+ p.name,
+ p.price,
+ p.description,
+ p.quantity
+FROM bangazonapi_product p
+WHERE price <= 999
+ORDER BY price DESC;

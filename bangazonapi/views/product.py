@@ -278,7 +278,8 @@ class Products(ViewSet):
 
         if number_sold is not None:
             def sold_filter(product):
-                if product.number_sold <= int(number_sold):
+                # use function since you cannot filter on computed property
+                if product.number_sold >= int(number_sold):
                     return True
                 return False
 

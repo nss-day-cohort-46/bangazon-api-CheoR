@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Bangazon Report - Products $999 or below</title>
+  </head>
+  <body>
+    <h1>Bangazon Report - Products $999 or below</h1>
+
+    <!-- Django version of intropolation 
+
+        Where the variable was passed into a context in another file.
+
+        template = 'products/list_inexpensive_products.html'
+        context = {
+            'products': list_of_products
+        }
+
+        If you want to use CSS, look up the /STATIC/ variable in settings.py
+    -->
+    {% for product in products %}
+    <section>
+      <h2>{{ product.name }}</h2>
+      <ul>
+        <li>Price: {{ product.price }}</li>
+        <li>Qnty: {{ product.quantity }}</li>
+        <li>Description: {{ product.description }}</li>
+      </ul>
+    </section>
+    {% endfor %}
+  </body>
+</html>

@@ -1,8 +1,6 @@
 """Module for generating report of products $999 or less"""
 
 
-from levelupreports.views import Connection
-from levelupapi.models import Game
 from django.shortcuts import render
 import sqlite3
 
@@ -19,6 +17,7 @@ def inexpensive_products_list(request):
 
             db_cursor.execute("""
                 SELECT
+                    p.id,
                     p.name,
                     p.price,
                     p.description,
@@ -33,15 +32,17 @@ def inexpensive_products_list(request):
             products = []
 
             for row in dataset:
-                products.appned({
+                products.append({
                     "id": row["id"],
                     "name": row["name"],
-                    "description": row["decriptoin"],
-                    "quantity": row["quantity"]
+                    "price": row["price"],
+                    "quantity": row["quantity"],
+                    "description": row["description"],
                 })
         template = 'products/list_inexepensive_products.html'
         context = {
-            'products': products
+            'products': products,
+            'count': len(products)
         }
 
         return render(request, template, context)

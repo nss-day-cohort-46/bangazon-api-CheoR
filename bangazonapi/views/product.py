@@ -254,6 +254,7 @@ class Products(ViewSet):
         order = self.request.query_params.get('order_by', None)
         direction = self.request.query_params.get('direction', None)
         number_sold = self.request.query_params.get('number_sold', None)
+        min_price = self.request.query_params.get('min_price', None)
         location = self.request.query_params.get('location', None)
 
         # these asssuming we can only do one query type at a time?
@@ -282,6 +283,9 @@ class Products(ViewSet):
                 return False
 
             products = filter(sold_filter, products)
+
+        if min_price is not None:
+            products = products.filter(price__gt=float(min_price))
 
         serializer = ProductSerializer(
             products, many=True, context={'request': request})

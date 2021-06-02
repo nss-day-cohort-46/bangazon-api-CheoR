@@ -94,13 +94,15 @@ class Products(ViewSet):
         customer = Customer.objects.get(user=request.auth.user)
         new_product.customer = customer
 
-        product_category = ProductCategory.objects.get(pk=request.data["category_id"])
+        product_category = ProductCategory.objects.get(
+            pk=request.data["category_id"])
         new_product.category = product_category
 
         if "image_path" in request.data:
             format, imgstr = request.data["image_path"].split(';base64,')
             ext = format.split('/')[-1]
-            data = ContentFile(base64.b64decode(imgstr), name=f'{new_product.id}-{request.data["name"]}.{ext}')
+            data = ContentFile(base64.b64decode(
+                imgstr), name=f'{new_product.id}-{request.data["name"]}.{ext}')
 
             new_product.image_path = data
 
@@ -152,7 +154,8 @@ class Products(ViewSet):
         """
         try:
             product = Product.objects.get(pk=pk)
-            serializer = ProductSerializer(product, context={'request': request})
+            serializer = ProductSerializer(
+                product, context={'request': request})
             return Response(serializer.data)
         except Exception as ex:
             return HttpResponseServerError(ex)
@@ -182,7 +185,8 @@ class Products(ViewSet):
         customer = Customer.objects.get(user=request.auth.user)
         product.customer = customer
 
-        product_category = ProductCategory.objects.get(pk=request.data["category_id"])
+        product_category = ProductCategory.objects.get(
+            pk=request.data["category_id"])
         product.category = product_category
         product.save()
 
@@ -250,6 +254,11 @@ class Products(ViewSet):
         order = self.request.query_params.get('order_by', None)
         direction = self.request.query_params.get('direction', None)
         number_sold = self.request.query_params.get('number_sold', None)
+        location = self.request.query_params.get('location', None)
+
+        # these asssuming we can only do one query type at a time?
+        if location is not None:
+            products = products.filter(location__icontains=location)
 
         if order is not None:
             order_filter = order
@@ -285,7 +294,8 @@ class Products(ViewSet):
         if request.method == "POST":
             rec = Recommendation()
             rec.recommender = Customer.objects.get(user=request.auth.user)
-            rec.customer = Customer.objects.get(user__id=request.data["recipient"])
+            rec.customer = Customer.objects.get(
+                user__id=request.data["recipient"])
             rec.product = Product.objects.get(pk=pk)
 
             rec.save()

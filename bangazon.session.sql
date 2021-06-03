@@ -24,8 +24,15 @@ FROM bangazonapi_product p
  INNER JOIN bangazonapi_productrating r ON p.customer_id = r.customer_id
 ORDER BY p.customer_id;
 /*
- Fetch products $999 and below for report.
+ Confirm creating of products under 10000.
+ Where the last 5 or products from location NSS were created to verfify products can be
+ created with price over 10000.
  */
+SELECT *
+FROM bangazonapi_product
+ORDER BY price DESC
+LIMIT 5;
+
 SELECT p.id,
  p.name,
  p.price,

@@ -31,16 +31,20 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # default
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    # installed
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    # user-defined
     'bangazonapi',
-    'safedelete',
+    'bangazonareports',
+    'safedelete',  # installed
 ]
 
 REST_FRAMEWORK = {

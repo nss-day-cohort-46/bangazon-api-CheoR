@@ -32,3 +32,12 @@ SELECT *
 FROM bangazonapi_product
 ORDER BY price DESC
 LIMIT 5;
+
+SELECT p.id,
+ p.name,
+ p.price,
+ p.description,
+ p.quantity
+FROM bangazonapi_product p
+WHERE price <= 999
+ORDER BY price DESC;

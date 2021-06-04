@@ -1,5 +1,4 @@
-"""Module for generating report of products $999 or less"""
-
+"""Module for generating report of products $1000 or more"""
 
 from django.shortcuts import render
 import sqlite3
@@ -8,8 +7,9 @@ from bangazonapi.models import Product
 from bangazonareports.views import Connection
 
 
-def inexpensive_products_list(request):
-    """Function builds an HTML report of products $999 or less"""
+def expensive_products_list(request):
+    """Function build an HTML report of products $1000 or more"""
+
     if request.method == 'GET':
         with sqlite3.connect(Connection.absolute_path_to_db) as conn:
             conn.row_factory = sqlite3.Row
@@ -21,9 +21,9 @@ def inexpensive_products_list(request):
                     p.name,
                     p.price,
                     p.description,
-                    p.quantity
+                    p.quanity
                 FROM bangazonapi_product p
-                WHERE price <= 999
+                WHERE price >= 1000
                 ORDER BY price DESC;
             """)
 
@@ -40,7 +40,7 @@ def inexpensive_products_list(request):
                     "description": row["description"],
                 })
 
-        template = 'products/list_inexepensive_products.html'
+        template = 'products/list_exepensive_products.html'
         context = {
             'products': products,
             'count': len(products)

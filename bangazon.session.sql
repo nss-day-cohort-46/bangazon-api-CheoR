@@ -32,7 +32,6 @@ SELECT *
 FROM bangazonapi_product
 ORDER BY price DESC
 LIMIT 5;
-
 SELECT p.id,
  p.name,
  p.price,
@@ -41,3 +40,22 @@ SELECT p.id,
 FROM bangazonapi_product p
 WHERE price <= 999
 ORDER BY price DESC;
+/*
+ Confirm user ids and customer ids.
+ */
+SELECT c.id AS customer_record,
+ c.user_id AS customer_user_id,
+ t.user_id AS token_user_id,
+ u.id AS auth_user_id,
+ t.key AS token,
+ u.username,
+ u.first_name,
+ u.last_name
+FROM bangazonapi_customer c
+ INNER JOIN authtoken_token t ON t.user_id = c.user_id
+ INNER JOIN auth_user u ON u.id = t.user_id;
+/*
+ For delete lineitem from cart.
+ */
+SELECT *
+FROM bangazonapi_product;

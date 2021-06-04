@@ -21,7 +21,7 @@ def expensive_products_list(request):
                     p.name,
                     p.price,
                     p.description,
-                    p.quanity
+                    p.quantity
                 FROM bangazonapi_product p
                 WHERE price >= 1000
                 ORDER BY price DESC;
